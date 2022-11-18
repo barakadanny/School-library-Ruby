@@ -13,11 +13,11 @@ class App
   end
 
   def start_console
-    puts 'Welcome to my School Library!'
+    puts 'School Library!'
     until list_of_options
       input = gets.chomp
       if input == '7'
-        puts 'Thank You for using my School Library!'
+        puts 'Thank You for using the School Library!'
         break
       end
 
@@ -26,12 +26,12 @@ class App
   end
 
   def list_all_books
-    puts 'Database is empty! Add a book.' if @books.empty?
+    puts 'No Book available!' if @books.empty?
     @books.each { |book| puts "[Book] Title: #{book.title}, Author: #{book.author}" }
   end
 
   def list_all_persons
-    puts 'Database is empty! Add a person.' if @persons.empty?
+    puts 'DNo person available in the DataBase' if @persons.empty?
     @persons.each do |person|
       puts "[#{person.class.name}] Name: #{person.name}, Age: #{person.age}, id: #{person.id}"
     end
@@ -47,7 +47,7 @@ class App
     when '2'
       create_teacher
     else
-      puts 'Invalid input. Try again'
+      puts 'Invalid input!'
     end
   end
 
@@ -63,7 +63,7 @@ class App
     when 'n'
       student = Student.new(age, name, parent_permission: false)
       @persons << student
-      puts 'Student doesnt have parent permission, cant rent books'
+      puts 'Need parent permission to Borrow a book ⚠️'
     when 'y'
       student = Student.new(age, name, parent_permission: true)
       @persons << student
@@ -96,7 +96,7 @@ class App
   end
 
   def create_rental
-    puts 'Select which book you want to rent by entering its number'
+    puts 'Enter Book ID to create a rental: '
     @books.each_with_index { |book, index| puts "#{index}) Title: #{book.title}, Author: #{book.author}" }
 
     book_id = gets.chomp.to_i
