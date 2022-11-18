@@ -1,48 +1,61 @@
 require './person'
-require './book'
-require './rental'
-require './teacher'
 require './student'
+require './teacher'
+require './book'
 require './classroom'
+require './rental'
 
 class App
   def initialize
-    @persons = []
     @books = []
+    @persons = []
     @rentals = []
   end
 
-  def list_books
-    puts 'there is no Books!' if @books.empty?
-    @books.each { |book| puts "[Book] Title : #{book.title}, Author : #{book.author}" }
+  def start_console
+    puts 'Welcome to my School Library!'
+    until list_of_options
+      input = gets.chomp
+      if input == '7'
+        puts 'Thank You for using my School Library!'
+        break
+      end
+
+      option input
+    end
   end
 
-  def list_persons
-    puts 'there is no person!' if @persons.empty?
+  def list_all_books
+    puts 'Database is empty! Add a book.' if @books.empty?
+    @books.each { |book| puts "[Book] Title: #{book.title}, Author: #{book.author}" }
+  end
+
+  def list_all_persons
+    puts 'Database is empty! Add a person.' if @persons.empty?
     @persons.each do |person|
       puts "[#{person.class.name}] Name: #{person.name}, Age: #{person.age}, id: #{person.id}"
     end
   end
 
   def create_person
-    print 'Do you want to create a student (1) or a Teacher (2)? [Input the number]: '
-    person_type = gets.chom
-    
+    print 'To create a student, press 1, to create a teacher, press 2 : '
+    option = gets.chomp
+
     case option
     when '1'
       create_student
     when '2'
       create_teacher
     else
-      puts 'Invalid option'
+      puts 'Invalid input. Try again'
     end
   end
 
   def create_student
-    puts 'Create new Student'
-    Print 'Enter Age: '
+    puts 'Create a new student'
+    print 'Enter student age: '
     age = gets.chomp.to_i
-    print 'Enter Name: '
+    print 'Enter name: '
     name = gets.chomp
     print 'Has parent permission? [Y/N]: '
     parent_permission = gets.chomp.downcase
@@ -50,13 +63,13 @@ class App
     when 'n'
       student = Student.new(age, name, parent_permission: false)
       @persons << student
-      puts 'Student does not have permission'
+      puts 'Student doesnt have parent permission, cant rent books'
     when 'y'
       student = Student.new(age, name, parent_permission: true)
       @persons << student
-      puts 'Student has permission'
+      puts 'Student created successfully'
+    end
   end
-end
 
   def create_teacher
     puts 'Create a new teacher'
