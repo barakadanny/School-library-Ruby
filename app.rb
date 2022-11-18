@@ -58,23 +58,27 @@ class App
   end
 end
 
-def create_student
-    puts 'Create a new student'
-    print 'Enter student age: '
+  def create_teacher
+    puts 'Create a new teacher'
+    print 'Enter teacher age: '
     age = gets.chomp.to_i
-    print 'Enter name: '
+    print 'Enter teacher name: '
     name = gets.chomp
-    print 'Has parent permission? [Y/N]: '
-    parent_permission = gets.chomp.downcase
-    case parent_permission
-    when 'n'
-      student = Student.new(age, name, parent_permission: false)
-      @persons << student
-      puts 'Student doesnt have parent permission, cant rent books'
-    when 'y'
-      student = Student.new(age, name, parent_permission: true)
-      @persons << student
-      puts 'Student created successfully'
-    end
+    print 'Enter teacher specialization: '
+    specialization = gets.chomp
+    teacher = Teacher.new(specialization, age, name)
+    @persons << teacher
+    puts 'Teacher created successfully'
+  end
+
+  def create_book()
+    puts 'Create a new book'
+    print 'Enter title: '
+    title = gets.chomp
+    print 'Enter author: '
+    author = gets
+    book = Book.new(title, author)
+    @books.push(book)
+    puts "Book #{title} created successfully."
   end
   
