@@ -34,3 +34,5 @@ def option(input)
     puts 'Invalid option'
   end
 end
+
+main
