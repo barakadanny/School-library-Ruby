@@ -17,7 +17,7 @@ class App
     until list_of_options
       input = gets.chomp
       if input == '7'
-        puts 'Thank You for using the School Library!'
+        puts 'Thank You for using my School Library!'
         break
       end
 
@@ -31,7 +31,7 @@ class App
   end
 
   def list_all_persons
-    puts 'DNo person available in the DataBase' if @persons.empty?
+    puts 'No person available in the DataBase' if @persons.empty?
     @persons.each do |person|
       puts "[#{person.class.name}] Name: #{person.name}, Age: #{person.age}, id: #{person.id}"
     end
@@ -47,7 +47,7 @@ class App
     when '2'
       create_teacher
     else
-      puts 'Invalid input!'
+      puts 'Invalid input. Try again'
     end
   end
 
@@ -96,7 +96,7 @@ class App
   end
 
   def create_rental
-    puts 'Enter Book ID to create a rental: '
+    puts 'Select which book you want to rent by entering its number'
     @books.each_with_index { |book, index| puts "#{index}) Title: #{book.title}, Author: #{book.author}" }
 
     book_id = gets.chomp.to_i
