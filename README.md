@@ -27,6 +27,11 @@ To get a local copy up and running follow these simple example steps.
 - GitHub: [@barakadan](https://github.com/barakadanny)
 - LinkedIn: [danny baraka](https://www.linkedin.com/in/danny-baraka-589156169/)
 
+👤 **George William Kidde**
+  - Github: [@kidde60](https://github.com/kidde60)
+  - Twitter: [@KGWilliam60](https://twitter.com/KGWilliam60)
+  - Linkedin: [Linkedin](https://www.linkedin.com/in/kidde-george-william/)
+
 
 ## 🤝 Contributing
 
