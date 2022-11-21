@@ -51,24 +51,30 @@ class App
     end
   end
 
-  def create_student
-    puts 'Create a new student'
-    print 'Enter student age: '
-    age = gets.chomp.to_i
-    print 'Enter name: '
-    name = gets.chomp
-    print 'Has parent permission? [Y/N]: '
-    parent_permission = gets.chomp.downcase
-    case parent_permission
-    when 'n'
-      student = Student.new(age, name, parent_permission: false)
-      @persons << student
-      puts 'Need parent permission to Borrow a book ⚠️'
+  def permission?
+    print 'Has parent permission? [Y/N]:'
+    permission = gets.chomp
+
+    case permission.downcase
     when 'y'
-      student = Student.new(age, name, parent_permission: true)
-      @persons << student
-      puts 'Student created successfully'
+      true
+    when 'n'
+      false
+    else
+      puts 'Invalid input'
+      permission?
     end
+  end
+
+  def create_student
+    print 'Age: '
+    age = gets.chomp.to_i
+    print 'Name: '
+    name = gets.chomp
+    parent_permission = permission?
+    student = Student.new(age, name, parent_permission)
+    @persons.push(student)
+    puts 'Person created successfully'
   end
 
   def create_teacher
