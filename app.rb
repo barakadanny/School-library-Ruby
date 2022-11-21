@@ -65,6 +65,7 @@ class App
       permission?
     end
   end
+
   def create_student
     print 'Age: '
     age = gets.chomp.to_i
