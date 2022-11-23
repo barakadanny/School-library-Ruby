@@ -1,4 +1,4 @@
-require_relative '../../classroom.rb'
+require_relative '../../classroom'
 require 'rspec/autorun' 
 describe Classroom do
     context 'When testing the Classsroom class' do

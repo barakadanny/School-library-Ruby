@@ -13,6 +13,4 @@ describe Teacher do
       expect(@teacher1.name).to eq 'Sam'
       expect(@teacher2.name).to eq 'Dan'
     end
-  
-
-end  
+end

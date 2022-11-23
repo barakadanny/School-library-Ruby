@@ -1,6 +1,6 @@
-require_relative '../../rental.rb'
-require_relative '../../teacher.rb'
-require_relative '../../book.rb'
+require_relative '../../rental'
+require_relative '../../teacher'
+require_relative '../../book'
 require 'rspec/autorun' 
 
 describe Book do
@@ -14,3 +14,4 @@ describe Book do
       end
     end
   end
+  

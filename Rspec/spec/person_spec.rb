@@ -1,4 +1,4 @@
-require_relative '../../person.rb'
+require_relative '../../person'
 require 'rspec/autorun' 
 describe Person do
     context 'When testing the Person class' do
@@ -11,3 +11,4 @@ describe Person do
       end
     end
   end
+  
