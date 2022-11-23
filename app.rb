@@ -8,7 +8,7 @@ require './persist'
 
 class App
   def initialize
-    @persist_person= Persist.new('person.json')
+    @persist_person = Persist.new('person.json')
     @persist_books = Persist.new('book.json')
     @persist_rentals = Persist.new('rental.json')
     @books = []
@@ -128,6 +128,7 @@ class App
     puts "Book #{title} created successfully."
   end
 
+  # rubocop:disable Metrics/MethodLength
   def create_rental
     puts 'Select which book you want to rent by entering its number'
     @books.each_with_index { |book, index| puts "#{index}) Title: #{book.title}, Author: #{book.author}" }
@@ -159,6 +160,7 @@ class App
     save_rental.save(save)
     puts 'Rental created successfully'
   end
+  # rubocop:enable Metrics/MethodLength
 
   def list_all_rentals
     puts 'To see person rentals enter the person ID: '
