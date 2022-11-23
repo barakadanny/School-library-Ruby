@@ -32,7 +32,7 @@ class App
   def list_all_books
     books_list = @persist_books.load
     puts 'No Book available!' if books_list.empty?
-    books_list.each { |book| puts "[Book] Title: #{book.title}, Author: #{book.author}" }
+    books_list.each_with_index { |book, i| puts "[Book #{i}] Title: #{book['title']}, Author: #{book['author']}" }
   end
 
   def list_all_persons
