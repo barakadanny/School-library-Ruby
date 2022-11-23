@@ -1,5 +1,5 @@
 require_relative '../../classroom'
-require 'rspec/autorun' 
+require 'rspec/autorun'
 describe Classroom do
   context 'When testing the Classsroom class' do
     it 'should create a new classroom' do

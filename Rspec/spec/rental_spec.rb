@@ -1,7 +1,7 @@
 require_relative '../../rental'
 require_relative '../../teacher'
 require_relative '../../book'
-require 'rspec/autorun' 
+require 'rspec/autorun'
 
 describe Book do
   context 'When testing the Rental class' do
