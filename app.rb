@@ -36,9 +36,10 @@ class App
   end
 
   def list_all_persons
-    puts 'No person available in the DataBase' if @persons.empty?
-    @persons.each do |person|
-      puts "[#{person.class.name}] Name: #{person.name}, Age: #{person.age}, id: #{person.id}"
+    persons_list = @persist_person.load
+    puts 'No person available in the DataBase' if persons_list.empty?
+    persons_list.each_with_index do |person, i|
+      puts "[#{i}] Name: #{person['name']}, Age: #{person['age']}, id: #{person['id']}"
     end
   end
 
