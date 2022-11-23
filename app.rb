@@ -6,7 +6,6 @@ require './classroom'
 require './rental'
 require './persist'
 
-
 class App
   def initialize
     @persist_person= Persist.new('person.json')
@@ -31,8 +30,9 @@ class App
   end
 
   def list_all_books
-    puts 'No Book available!' if @books.empty?
-    @books.each { |book| puts "[Book] Title: #{book.title}, Author: #{book.author}" }
+    books_list = @persist_books.load
+    puts 'No Book available!' if books_list.empty?
+    books_list.each { |book| puts "[Book] Title: #{book.title}, Author: #{book.author}" }
   end
 
   def list_all_persons
