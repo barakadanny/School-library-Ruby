@@ -1,0 +1,38 @@
+[
+  {
+    "date": "2019",
+    "book": {
+      "title": "The Book of the New Sun",
+      "author": "Gene Wolfe"
+    },
+    "person": {
+      "id": "1",
+      "name": "John",
+      "age": "30"
+    }
+   },
+  {
+    "date": "2019",
+    "book": {
+      "title": "The Book of the New Sun",
+      "author": "Gene Wolfe"
+    },
+    "person": {
+      "id": "2",
+      "name": "Jane",
+      "age": "25"
+    }
+  },
+  {
+    "date": "2019",
+    "book": {
+      "title": "The Book of the New Sun",
+      "author": "Gene Wolfe"
+    },
+    "person": {
+      "id": "3",
+      "name": "Jack",
+      "age": "35"
+    }
+  }
+]

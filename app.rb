@@ -4,9 +4,13 @@ require './teacher'
 require './book'
 require './classroom'
 require './rental'
+require './persist'
 
 class App
   def initialize
+    @persist_person = Persist.new('person.json')
+    @persist_books = Persist.new('book.json')
+    @persist_rentals = Persist.new('rental.json')
     @books = []
     @persons = []
     @rentals = []
@@ -26,14 +30,16 @@ class App
   end
 
   def list_all_books
-    puts 'No Book available!' if @books.empty?
-    @books.each { |book| puts "[Book] Title: #{book.title}, Author: #{book.author}" }
+    books_list = @persist_books.load
+    puts 'No Book available!' if books_list.empty?
+    books_list.each_with_index { |book, i| puts "[Book #{i}] Title: #{book['title']}, Author: #{book['author']}" }
   end
 
   def list_all_persons
-    puts 'No person available in the DataBase' if @persons.empty?
-    @persons.each do |person|
-      puts "[#{person.class.name}] Name: #{person.name}, Age: #{person.age}, id: #{person.id}"
+    persons_list = @persist_person.load
+    puts 'No person available in the DataBase' if persons_list.empty?
+    persons_list.each_with_index do |person, i|
+      puts "[#{i}] Name: #{person['name']}, Age: #{person['age']}, id: #{person['id']}"
     end
   end
 
@@ -74,6 +80,13 @@ class App
     parent_permission = permission?
     student = Student.new(age, name, parent_permission)
     @persons.push(student)
+    save = @persist_person.load
+
+    @persons.each do |person|
+      save << { name: person.name, id: person.id, age: person.age }
+    end
+    save_student = Persist.new('person.json')
+    save_student.save(save)
     puts 'Person created successfully'
   end
 
@@ -87,6 +100,13 @@ class App
     specialization = gets.chomp
     teacher = Teacher.new(specialization, age, name)
     @persons << teacher
+
+    save = @persist_person.load
+    @persons.each do |person|
+      save << { name: person.name, id: person.id, age: person.age }
+    end
+    save_teacher = Persist.new('person.json')
+    save_teacher.save(save)
     puts 'Teacher created successfully'
   end
 
@@ -98,9 +118,17 @@ class App
     author = gets
     book = Book.new(title, author)
     @books.push(book)
+
+    save = @persist_books.load
+    @books.each do |b|
+      save << { title: b.title, author: b.author }
+    end
+    save_book = Persist.new('book.json')
+    save_book.save(save)
     puts "Book #{title} created successfully."
   end
 
+  # rubocop:disable Metrics/MethodLength
   def create_rental
     puts 'Select which book you want to rent by entering its number'
     @books.each_with_index { |book, index| puts "#{index}) Title: #{book.title}, Author: #{book.author}" }
@@ -120,8 +148,19 @@ class App
     rental = Rental.new(date, @persons[person_id], @books[book_id])
     @rentals << rental
 
+    save = @persist_rentals.load
+    @rentals.each do |rent|
+      save << { date: rent.date, book: { title: rent.book['title'], author: rent.book['author'] }, person: {
+        id: rent.person['id'],
+        name: rent.person['name'],
+        age: rent.person['age']
+      } }
+    end
+    save_rental = Persist.new('rental.json')
+    save_rental.save(save)
     puts 'Rental created successfully'
   end
+  # rubocop:enable Metrics/MethodLength
 
   def list_all_rentals
     puts 'To see person rentals enter the person ID: '
